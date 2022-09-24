@@ -1,0 +1,65 @@
+/* 레이아웃 */
+.wrapper {
+  max-width: 738px;
+  margin: 0 auto;
+  background-color: lightgray;
+}
+
+/* 컴포넌트 */
+/* 헤더 */
+.screen-out {
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+.header {
+  background-color: antiquewhite;
+  margin-bottom: 68px;
+  text-align: center;
+}
+.header .img-logo {
+  width: 360px;
+  height: 180px;
+}
+
+/* 컨텐츠 */
+.section-white {
+  background-color: #fff;
+}
+.main-contents {
+  background-color: aquamarine;
+  display: flex;
+}
+.main-contents .section-vending,
+.main-contents .section-right {
+  width: 360px;
+}
+.main-contents .section-vending {
+  margin-right: auto;
+  padding: 31px 27px 28px;
+  box-sizing: border-box;
+}
+.section-vending .list-beverages {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  background-color: aliceblue;
+  margin-bottom: 20px;
+}
+.section-vending .cont-controller {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+}
+.main-contents .section-right {
+}
+.section-right .section-money {
+  padding: 9px 27px;
+  margin-bottom: 20px;
+}
+.section-right .section-mybeverage {
+  padding: 25px 27px 26px;
+}
