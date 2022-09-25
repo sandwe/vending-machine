@@ -39,8 +39,9 @@
 .main-contents .section-vending {
   margin-right: auto;
   padding: 31px 27px 28px;
-  box-sizing: border-box;
 }
+
+/* 자판기 음료 리스트 */
 .section-vending .list-beverages {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -48,13 +49,12 @@
   margin-bottom: 20px;
 }
 .list-beverages .list-item-beverage {
-  width: 94px;
+  /* width: 94px; */
   height: 130px;
   box-shadow: 0 0 4px rgb(0, 0, 0, 0.5);
   border-radius: 10px;
   text-align: center;
   padding: 11px 0 9px;
-  box-sizing: border-box;
   transition: all 0.2s;
   cursor: pointer;
   position: relative;
@@ -89,12 +89,13 @@
   font-weight: 500;
   line-height: 1;
   padding: 5px 0;
-  box-sizing: border-box;
   color: #fff;
 }
 .list-item-beverage .txt-price::after {
   content: "원";
 }
+
+/* 품절 */
 .list-item-beverage .bg-soldout {
   position: absolute;
   top: 0;
@@ -113,11 +114,108 @@
   right: 0;
   margin: 52px auto 35px;
 }
+
+/* 자판기 컨트롤러*/
+/* 자판기 컨트롤러 내 버튼 공통 스타일 */
+button {
+  box-shadow: 0 0 4px rgb(0, 0, 0, 0.5);
+  border: none;
+  background-color: #fff;
+  height: 33px;
+  cursor: pointer;
+}
 .section-vending .cont-controller {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 200px 94px;
   gap: 12px;
 }
+.cont-controller * {
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+}
+/* 잔액 */
+.cont-controller .txt-cash {
+  background-color: #eae8fe;
+  padding: 7px 10px;
+  line-height: 20px;
+  float: right;
+  line-height: 1.4;
+}
+.cont-controller .txt-cash::before {
+  content: "잔액:";
+}
+.txt-cash span {
+  float: right;
+}
+.txt-cash span::after {
+  content: "원";
+  margin-left: 2px;
+}
+/* 입금액 입력 */
+.cont-controller .input-cash {
+  border: 1px solid #bdbdbd;
+  padding: 6px;
+}
+.cont-controller .button-complete {
+  height: 106px;
+  background-color: #6327fe;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 선택한 음료 종류 2가지 이상 시 스크롤바 여백 */
+.cont-controller .cont-selected::-webkit-scrollbar {
+  width: 12px;
+}
+.cont-controller .cont-selected::-webkit-scrollbar-thumb {
+  background-color: white;
+  background-clip: padding-box;
+  border-radius: 20px;
+  border: 4px solid transparent;
+}
+.cont-controller .cont-selected::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/* 선택한 음료 */
+.cont-controller .cont-selected {
+  height: 106px;
+  background-color: #eae8fe;
+  padding: 12px 0;
+  overflow: auto;
+  border: 1px solid #bdbdbd;
+}
+
+.cont-selected .list-selected {
+  width: 170px;
+  margin: 0 auto;
+}
+.list-selected .list-item-selected {
+  background-color: #fff;
+  height: 46px;
+  padding: 7px 10px;
+  font-size: 9px;
+}
+.list-item-selected + .list-item-selected {
+  margin-top: 6px;
+}
+.list-item-selected img {
+  width: 18px;
+  height: 33px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.list-item-selected .item-count {
+  float: right;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #bdbdbd;
+}
+
+/* 오른쪽 콘텐츠 */
 .main-contents .section-right {
 }
 .section-right .section-money {
