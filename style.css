@@ -1,8 +1,10 @@
 /* 레이아웃 */
+body {
+  background-color: #eae8fe;
+}
 .wrapper {
-  max-width: 738px;
-  margin: 0 auto;
-  background-color: lightgray;
+  max-width: 748px;
+  margin: 0 auto 171px;
 }
 
 /* 컴포넌트 */
@@ -20,8 +22,74 @@
   text-align: center;
 }
 .header .img-logo {
-  width: 360px;
+  width: 386px;
   height: 180px;
+}
+
+/* 공통 스타일 */
+.cont-controller *,
+.section-money *,
+.section-mybeverage * {
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+}
+.cont-selected {
+  height: 106px;
+  background-color: #eae8fe;
+  padding: 12px 0;
+  overflow: auto;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+}
+/* 선택한 음료 종류 2가지 이상 시 스크롤바 여백 */
+.cont-selected::-webkit-scrollbar {
+  width: 12px;
+}
+.cont-selected::-webkit-scrollbar-thumb {
+  background-color: white;
+  background-clip: padding-box;
+  border-radius: 20px;
+  border: 4px solid transparent;
+}
+.cont-selected::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/* 선택한 음료 */
+.cont-selected {
+  height: 106px;
+  background-color: #eae8fe;
+  padding: 12px 0;
+  overflow: auto;
+  border: 1px solid #bdbdbd;
+}
+.cont-selected .list-selected {
+  width: calc(100% - 24px);
+  margin: 0 auto;
+}
+.list-selected .list-item-selected {
+  background-color: #fff;
+  height: 46px;
+  padding: 7px 10px;
+  font-size: 9px;
+}
+.list-item-selected + .list-item-selected {
+  margin-top: 6px;
+}
+.list-item-selected img {
+  width: 18px;
+  height: 33px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.list-item-selected .item-count {
+  float: right;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #bdbdbd;
 }
 
 /* 컨텐츠 */
@@ -29,7 +97,6 @@
   background-color: #fff;
 }
 .main-contents {
-  background-color: aquamarine;
   display: flex;
 }
 .main-contents .section-vending,
@@ -49,7 +116,6 @@
   margin-bottom: 20px;
 }
 .list-beverages .list-item-beverage {
-  /* width: 94px; */
   height: 130px;
   box-shadow: 0 0 4px rgb(0, 0, 0, 0.5);
   border-radius: 10px;
@@ -129,23 +195,15 @@ button {
   grid-template-columns: 200px 94px;
   gap: 12px;
 }
-.cont-controller * {
-  border-radius: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 19px;
-}
+
 /* 잔액 */
 .cont-controller .txt-cash {
   background-color: #eae8fe;
   padding: 7px 10px;
-  line-height: 20px;
-  float: right;
-  line-height: 1.4;
 }
-.cont-controller .txt-cash::before {
+/* .cont-controller .txt-cash::before {
   content: "잔액:";
-}
+} */
 .txt-cash span {
   float: right;
 }
@@ -165,63 +223,47 @@ button {
   font-weight: 700;
 }
 
-/* 선택한 음료 종류 2가지 이상 시 스크롤바 여백 */
-.cont-controller .cont-selected::-webkit-scrollbar {
-  width: 12px;
-}
-.cont-controller .cont-selected::-webkit-scrollbar-thumb {
-  background-color: white;
-  background-clip: padding-box;
-  border-radius: 20px;
-  border: 4px solid transparent;
-}
-.cont-controller .cont-selected::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-/* 선택한 음료 */
-.cont-controller .cont-selected {
-  height: 106px;
-  background-color: #eae8fe;
-  padding: 12px 0;
-  overflow: auto;
-  border: 1px solid #bdbdbd;
-}
-
-.cont-selected .list-selected {
-  width: 170px;
-  margin: 0 auto;
-}
-.list-selected .list-item-selected {
-  background-color: #fff;
-  height: 46px;
-  padding: 7px 10px;
-  font-size: 9px;
-}
-.list-item-selected + .list-item-selected {
-  margin-top: 6px;
-}
-.list-item-selected img {
-  width: 18px;
-  height: 33px;
-  vertical-align: middle;
-  margin-right: 10px;
-}
-.list-item-selected .item-count {
-  float: right;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  border: 1px solid #bdbdbd;
-}
-
 /* 오른쪽 콘텐츠 */
-.main-contents .section-right {
+.section-right {
+  font-size: 14px;
+  font-weight: 500;
 }
 .section-right .section-money {
   padding: 9px 27px;
   margin-bottom: 20px;
 }
+.section-money .txt-mycash {
+  border-radius: 5px;
+  background-color: #eae8fe;
+  padding: 7px 10px;
+}
+.txt-mycash span {
+  float: right;
+  font-weight: 700;
+}
+.txt-mycash span::after {
+  content: "원";
+  margin-left: 2px;
+}
 .section-right .section-mybeverage {
-  padding: 25px 27px 26px;
+  padding: 28px 27px 29px;
+}
+.section-mybeverage .tit-mybeverage {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 13px;
+}
+.section-mybeverage .cont-mybeverage {
+  height: 364px;
+  margin-bottom: 6px;
+}
+.section-mybeverage .txt-total,
+.txt-total span {
+  text-align: right;
+  font-size: 12px;
+  line-height: 17px;
+}
+.txt-total span::after {
+  content: "원";
+  margin-left: 2px;
 }
