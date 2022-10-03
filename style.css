@@ -8,23 +8,6 @@ body {
 }
 
 /* 컴포넌트 */
-/* 헤더 */
-.screen-out {
-  overflow: hidden;
-  position: absolute;
-  width: 0;
-  height: 0;
-  line-height: 0;
-  text-indent: -9999px;
-}
-.header {
-  margin-bottom: 68px;
-  text-align: center;
-}
-.header .img-logo {
-  width: 386px;
-  height: 180px;
-}
 
 /* 공통 스타일 */
 .cont-controller *,
@@ -42,6 +25,25 @@ body {
   overflow: auto;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
+}
+.screen-out {
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+/* 헤더 */
+
+.header {
+  margin-bottom: 68px;
+  text-align: center;
+}
+.header .img-logo {
+  width: 386px;
+  height: 180px;
 }
 
 /* 선택한 음료 종류 2가지 이상 시 스크롤바 여백 */
@@ -212,10 +214,6 @@ button {
 .txt-cash span {
   float: right;
 }
-.txt-cash span::after {
-  content: "원";
-  margin-left: 2px;
-}
 
 /* 입금액 입력 */
 .cont-controller .input-cash {
@@ -248,10 +246,7 @@ button {
   float: right;
   font-weight: 700;
 }
-.txt-mycash span::after {
-  content: "원";
-  margin-left: 2px;
-}
+
 /* 획득한 음료 */
 .section-right .section-mybeverage {
   padding: 28px 27px 29px;
