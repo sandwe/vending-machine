@@ -12,62 +12,34 @@
     <div class="wrapper">
       <header class="header">
         <h1 class="screen-out">벤딩머신</h1>
-        <img src="images/logo.png" alt="" class="img-logo" />
+        <img src="images/logo.png" alt="coca cola" class="img-logo" />
       </header>
       <main class="main-contents">
         <section class="section-white section-vending">
           <h2 class="screen-out">자판기</h2>
           <ul class="list-beverages">
             <li class="list-item-beverage">
-              <figure class="info-beverage">
-                <img src="images/original_cola.png" alt="오리지널 콜라" class="img-beverage" />
-                <figcaption class="txt-beverage">Original_Cola</figcaption>
-              </figure>
-              <span class="txt-price">1000</span>
+              <button class="btn-beverage">
+                <img src="images/original_cola.png" alt="" class="img-beverage" />
+                Original_Cola
+                <span class="txt-price">1000원</span>
+              </button>
             </li>
             <li class="list-item-beverage soldout">
-              <figure class="info-beverage">
-                <img src="images/violet_cola.png" alt="Violet_Cola" class="img-beverage" />
-                <figcaption class="txt-beverage">Violet_Cola</figcaption>
-              </figure>
-              <span class="txt-price">1000</span>
+              <button class="btn-beverage" disabled>
+                <img src="images/violet_cola.png" alt="" class="img-beverage" />
+                Original_Cola
+                <span class="txt-price">1000원</span>
+              </button>
               <div class="bg-soldout">
                 <img src="images/sold_out.png" alt="품절" class="img-soldout" />
               </div>
-            </li>
-            <li class="list-item-beverage">
-              <figure class="info-beverage">
-                <img src="images/yellow_cola.png" alt="Yellow_Cola" class="img-beverage" />
-                <figcaption class="txt-beverage">Yellow_Cola</figcaption>
-              </figure>
-              <span class="txt-price">1000</span>
-            </li>
-            <li class="list-item-beverage">
-              <figure class="info-beverage">
-                <img src="images/cool_cola.png" alt="Cool_Cola" class="img-beverage" />
-                <figcaption class="txt-beverage">Cool_Cola</figcaption>
-              </figure>
-              <span class="txt-price">1000</span>
-            </li>
-            <li class="list-item-beverage">
-              <figure class="info-beverage">
-                <img src="images/green_cola.png" alt="Green_Cola" class="img-beverage" />
-                <figcaption class="txt-beverage">Green_Cola</figcaption>
-              </figure>
-              <span class="txt-price">1000</span>
-            </li>
-            <li class="list-item-beverage">
-              <figure class="info-beverage">
-                <img src="images/orange_cola.png" alt="Orange_Cola" class="img-beverage" />
-                <figcaption class="txt-beverage">Orange_Cola</figcaption>
-              </figure>
-              <span class="txt-price">1000</span>
             </li>
           </ul>
           <div class="cont-controller">
             <div class="txt-cash">잔액:<span>1,000</span></div>
             <button class="button">거스름돈 반환</button>
-            <input type="text" placeholder="입금액 입력" class="input-cash" />
+            <input type="number" placeholder="입금액 입력" class="input-cash" min="1000" step="100" />
             <button class="button">입금</button>
             <div class="cont-selected">
               <ul class="list-selected">
@@ -103,7 +75,7 @@
                 </li>
               </ul>
             </div>
-            <div class="txt-total">총금액 : <span>9,000</span></div>
+            <p class="txt-total">총금액 : 9,000원</p>
           </section>
         </div>
       </main>
