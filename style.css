@@ -64,12 +64,11 @@ body {
 .cont-selected {
   height: 106px;
   background-color: #eae8fe;
-  padding: 12px 0;
+  padding: 12px;
   overflow: auto;
   border: 1px solid #bdbdbd;
 }
 .cont-selected .list-selected {
-  width: calc(100% - 24px);
   margin: 0 auto;
 }
 .list-selected .list-item-selected {
@@ -102,6 +101,7 @@ body {
 }
 .main-contents {
   display: flex;
+  align-items: stretch;
 }
 .main-contents .section-vending,
 .main-contents .section-right {
@@ -109,7 +109,7 @@ body {
 }
 .main-contents .section-vending {
   margin-right: auto;
-  padding: 31px 27px 28px;
+  padding: 24px 27px;
 }
 
 /* 자판기 음료 리스트 */
@@ -208,9 +208,6 @@ button {
   padding: 7px 10px;
 }
 
-/* .cont-controller .txt-cash::before {
-  content: "잔액:";
-} */
 .txt-cash span {
   float: right;
 }
@@ -235,7 +232,7 @@ button {
 /* 소지금 */
 .section-right .section-money {
   padding: 9px 27px;
-  margin-bottom: 20px;
+  margin-bottom: 13px;
 }
 .section-money .txt-mycash {
   border-radius: 5px;
@@ -249,7 +246,7 @@ button {
 
 /* 획득한 음료 */
 .section-right .section-mybeverage {
-  padding: 28px 27px 29px;
+  padding: 28px 27px;
 }
 .section-mybeverage .tit-mybeverage {
   font-weight: 700;
@@ -257,11 +254,35 @@ button {
   margin-bottom: 13px;
 }
 .section-mybeverage .cont-mybeverage {
-  height: 364px;
   margin-bottom: 6px;
+  height: 364px;
 }
 .section-mybeverage .txt-total {
   text-align: right;
   font-size: 12px;
   line-height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-color: #fff;
+  }
+  .header {
+    margin-bottom: 18px;
+  }
+  .header .img-logo {
+    width: 166px;
+    height: 78px;
+  }
+  .main-contents {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-contents .section-vending {
+    margin-right: 0;
+    padding: 11px 27px;
+  }
+  .section-right .section-money {
+    margin-bottom: 0;
+  }
 }
