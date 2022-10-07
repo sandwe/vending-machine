@@ -124,7 +124,6 @@ body {
   box-shadow: 0 0 4px rgb(0, 0, 0, 0.5);
   border-radius: 10px;
   transition: all 0.1s;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
@@ -144,6 +143,7 @@ body {
   font-size: 9px;
   color: #333;
   text-align: center;
+  border-radius: inherit;
 }
 .btn-beverage .img-beverage {
   width: 36px;

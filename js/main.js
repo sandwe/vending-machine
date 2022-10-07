@@ -28,6 +28,7 @@ function setBeverages(beverages) {
     span.innerHTML = `${beverage.price}원`;
 
     if (!beverage.quantity) {
+      li.classList.add("soldout");
       const divEl = document.createElement("div");
       divEl.classList.add("bg-soldout");
       const soldOutImg = document.createElement("img");
