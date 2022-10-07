@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>벤딩머신</title>
   </head>
   <body>
@@ -17,71 +17,15 @@
       <main class="main-contents">
         <section class="section-white section-vending">
           <h2 class="screen-out">자판기</h2>
-          <ul class="list-beverages">
-            <li class="list-item-beverage">
-              <button class="btn-beverage">
-                <img src="images/original_cola.png" alt="" class="img-beverage" />
-                Original_Cola
-                <span class="txt-price">1000원</span>
-              </button>
-            </li>
-            <li class="list-item-beverage soldout">
-              <button class="btn-beverage" disabled>
-                <img src="images/violet_cola.png" alt="" class="img-beverage" />
-                Original_Cola
-                <span class="txt-price">1000원</span>
-              </button>
-              <div class="bg-soldout">
-                <img src="images/sold_out.png" alt="품절" class="img-soldout" />
-              </div>
-            </li>
-            <li class="list-item-beverage">
-              <button class="btn-beverage">
-                <img src="images/original_cola.png" alt="" class="img-beverage" />
-                Original_Cola
-                <span class="txt-price">1000원</span>
-              </button>
-            </li>
-
-            <li class="list-item-beverage">
-              <button class="btn-beverage">
-                <img src="images/original_cola.png" alt="" class="img-beverage" />
-                Original_Cola
-                <span class="txt-price">1000원</span>
-              </button>
-            </li>
-            <li class="list-item-beverage">
-              <button class="btn-beverage">
-                <img src="images/original_cola.png" alt="" class="img-beverage" />
-                Original_Cola
-                <span class="txt-price">1000원</span>
-              </button>
-            </li>
-            <li class="list-item-beverage">
-              <button class="btn-beverage">
-                <img src="images/original_cola.png" alt="" class="img-beverage" />
-                Original_Cola
-                <span class="txt-price">1000원</span>
-              </button>
-            </li>
-          </ul>
+          <ul class="list-beverages"></ul>
           <div class="cont-controller">
-            <div class="txt-cash">잔액:<span>1,000 원</span></div>
+            <div class="txt-cash">잔액:<span>0 원</span></div>
             <button class="button">거스름돈 반환</button>
             <input type="number" placeholder="입금액 입력" class="input-cash" min="1000" step="100" />
             <button class="button">입금</button>
             <section class="cont-selected">
               <h3 class="screen-out">선택한 음료</h3>
-              <ul class="list-selected">
-                <li class="list-item-selected">
-                  <img src="images/original_cola.png" alt="Original_Cola" />Original_Cola
-                  <span class="item-count">1</span>
-                </li>
-                <li class="list-item-selected">
-                  <img src="images/original_cola.png" alt="Original_Cola" />Original_Cola
-                  <span class="item-count">1</span>
-                </li>
-              </ul>
+              <ul class="list-selected"></ul>
             </section>
             <button class="button button-complete">획득</button>
           </div>
@@ -89,26 +33,18 @@
         <div class="section-right">
           <section class="section-white section-money">
             <h2 class="screen-out">소지금</h2>
-            <div class="txt-mycash">소지금:<span>25,000 원</span></div>
+            <div class="txt-mycash">소지금:<span>0 원</span></div>
           </section>
           <section class="section-white section-mybeverage">
             <h2 class="tit-mybeverage">획득한 음료</h2>
             <div class="cont-selected cont-mybeverage">
-              <ul class="list-selected">
-                <li class="list-item-selected">
-                  <img src="images/original_cola.png" alt="Original_Cola" />Original_Cola
-                  <span class="item-count">1</span>
-                </li>
-                <li class="list-item-selected">
-                  <img src="images/original_cola.png" alt="Original_Cola" />Original_Cola
-                  <span class="item-count">1</span>
-                </li>
-              </ul>
+              <ul class="list-selected"></ul>
             </div>
-            <p class="txt-total">총금액 : 9,000원</p>
+            <p class="txt-total">총금액 : 0원</p>
           </section>
         </div>
       </main>
     </div>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
