@@ -1,18 +1,19 @@
-import cola from "./dummy_data/cola.js";
+import beverage from "./dummy_data/beverage.js";
 
 const state = {
-  cola,
+  beverage: beverage,
+  listSelected: [],
 };
 
 // 음료 데이터 렌더링
-function setBeverages(beverages) {
+function createBeverageItems(beverages) {
   const ul = document.querySelector(".list-beverages");
+  ul.innerHTML = "";
 
   beverages.forEach((beverage) => {
     const li = document.createElement("li");
     const button = document.createElement("button");
     const img = document.createElement("img");
-    const colaNameText = document.createTextNode(`${beverage.name}`);
     const span = document.createElement("span");
 
     li.classList.add("list-item-beverage");
@@ -20,28 +21,82 @@ function setBeverages(beverages) {
     img.classList.add("img-beverage");
     span.classList.add("txt-price");
 
+    img.src = `${beverage.image}`;
+    span.textContent = `${beverage.price}원`;
+
     ul.appendChild(li);
     li.appendChild(button);
-    button.append(img, colaNameText, span);
-
-    img.src = `${beverage.image}`;
-    span.innerHTML = `${beverage.price}원`;
+    button.append(img, beverage.name, span);
 
     if (!beverage.quantity) {
-      li.classList.add("soldout");
-      const divEl = document.createElement("div");
-      divEl.classList.add("bg-soldout");
+      const soldout = document.createElement("div");
       const soldOutImg = document.createElement("img");
+
+      li.classList.add("soldout");
+      soldout.classList.add("bg-soldout");
       soldOutImg.classList.add("img-soldout");
       soldOutImg.src = "../../images/sold_out.png";
-      divEl.appendChild(soldOutImg);
-      li.appendChild(divEl);
+      button.setAttribute("disabled", "");
+
+      soldout.appendChild(soldOutImg);
+      li.appendChild(soldout);
     }
+
+    button.addEventListener("click", () => {
+      if (beverage.quantity) decreaseQuantity(beverage.id);
+    });
+  });
+}
+
+// 음료 개수 감소
+function decreaseQuantity(id) {
+  const selectedItem = state.beverage.find((v) => v.id === id);
+  selectedItem.quantity -= 1;
+
+  createBeverageItems(state.beverage);
+  addSelectedItems(selectedItem);
+}
+
+// 선택한 음료 추가
+function addSelectedItems(item) {
+  const itemFound = state.listSelected.find((el) => el.id === item.id);
+
+  if (itemFound) {
+    itemFound.quantity += 1;
+  } else {
+    state.listSelected.push({
+      id: item.id,
+      name: item.name,
+      quantity: 1,
+      image: item.image,
+    });
+  }
+
+  showSelectedItems();
+}
+
+// 선택한 음료 보여주기
+function showSelectedItems() {
+  const ulSelected = document.querySelector(".list-selected");
+  ulSelected.innerHTML = "";
+
+  state.listSelected.forEach((item) => {
+    const li = document.createElement("li");
+    const img = document.createElement("img");
+    const span = document.createElement("span");
+
+    li.classList.add("list-item-selected");
+    img.src = `${item.image}`;
+    span.classList.add("item-count");
+    span.textContent = item.quantity;
+
+    li.append(img, item.name, span);
+    ulSelected.appendChild(li);
   });
 }
 
 function init() {
-  setBeverages(state.cola);
+  createBeverageItems(state.beverage);
 }
 
 init();
