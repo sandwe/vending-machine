@@ -3,6 +3,7 @@ import beverage from "./dummy_data/beverage.js";
 const state = {
   beverage: beverage,
   listSelected: [],
+  userMoney: 0,
 };
 
 // 음료 데이터 렌더링
@@ -67,6 +68,7 @@ function addSelectedItems(item) {
     state.listSelected.push({
       id: item.id,
       name: item.name,
+      price: item.price,
       quantity: 1,
       image: item.image,
     });
@@ -77,7 +79,7 @@ function addSelectedItems(item) {
 
 // 선택한 음료 보여주기
 function showSelectedItems() {
-  const ulSelected = document.querySelector(".list-selected");
+  const ulSelected = document.querySelector(".cont-selected .list-selected");
   ulSelected.innerHTML = "";
 
   state.listSelected.forEach((item) => {
@@ -95,8 +97,21 @@ function showSelectedItems() {
   });
 }
 
+function userMoneyInfo() {
+  let userMoney = parseInt(localStorage.getItem("userMoney")) || 0;
+
+  if (!userMoney) {
+    userMoney += parseInt(prompt("소지금이 없어요. 소지금을 입력해주세요.", 1000));
+    localStorage.setItem("userMoney", userMoney);
+  }
+
+  state.userMoney = userMoney;
+  document.querySelector(".txt-mycash > span").textContent = `${state.userMoney} 원`;
+}
+
 function init() {
   createBeverageItems(state.beverage);
+  userMoneyInfo();
 }
 
 init();
