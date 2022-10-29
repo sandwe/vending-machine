@@ -7,6 +7,7 @@ const state = {
   userMoney: 0,
 };
 
+const btnChange = document.querySelector(".btn-change");
 const btnCash = document.querySelector(".btn-cash");
 const cashLeftTxt = document.querySelector(".txt-cash > span");
 const userMoneyTxt = document.querySelector(".txt-mycash > span");
@@ -117,9 +118,7 @@ function userMoneyInfo() {
 function acceptCash() {
   const inpVal = parseInt(document.querySelector(".input-cash").value) || 0;
 
-  if (!inpVal || state.userMoney < inpVal) {
-    return;
-  }
+  if (!inpVal || state.userMoney < inpVal) return;
 
   state.cashLeft += inpVal;
   state.userMoney -= inpVal;
@@ -128,8 +127,19 @@ function acceptCash() {
   userMoneyTxt.textContent = `${state.userMoney} 원`;
 }
 
+function returnChange() {
+  if (!state.cashLeft) return;
+
+  state.userMoney += state.cashLeft;
+  state.cashLeft = 0;
+  localStorage.setItem("userMoney", state.userMoney);
+  cashLeftTxt.textContent = `${state.cashLeft} 원`;
+  userMoneyTxt.textContent = `${state.userMoney} 원`;
+}
+
 function init() {
   createBeverageItems(state.beverage);
+  btnChange.addEventListener("click", returnChange);
   btnCash.addEventListener("click", acceptCash);
   userMoneyInfo();
 }
