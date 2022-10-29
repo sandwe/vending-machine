@@ -3,8 +3,13 @@ import beverage from "./dummy_data/beverage.js";
 const state = {
   beverage: beverage,
   listSelected: [],
+  cashLeft: 0,
   userMoney: 0,
 };
+
+const btnCash = document.querySelector(".btn-cash");
+const cashLeftTxt = document.querySelector(".txt-cash > span");
+const userMoneyTxt = document.querySelector(".txt-mycash > span");
 
 // 음료 데이터 렌더링
 function createBeverageItems(beverages) {
@@ -106,11 +111,26 @@ function userMoneyInfo() {
   }
 
   state.userMoney = userMoney;
-  document.querySelector(".txt-mycash > span").textContent = `${state.userMoney} 원`;
+  userMoneyTxt.textContent = `${state.userMoney} 원`;
+}
+
+function acceptCash() {
+  const inpVal = parseInt(document.querySelector(".input-cash").value) || 0;
+
+  if (!inpVal || state.userMoney < inpVal) {
+    return;
+  }
+
+  state.cashLeft += inpVal;
+  state.userMoney -= inpVal;
+  localStorage.setItem("userMoney", state.userMoney);
+  cashLeftTxt.textContent = `${state.cashLeft} 원`;
+  userMoneyTxt.textContent = `${state.userMoney} 원`;
 }
 
 function init() {
   createBeverageItems(state.beverage);
+  btnCash.addEventListener("click", acceptCash);
   userMoneyInfo();
 }
 
