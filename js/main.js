@@ -3,14 +3,19 @@ import beverage from "./dummy_data/beverage.js";
 const state = {
   beverage: beverage,
   listSelected: [],
+  userBeverage: [],
   cashLeft: 0,
   userMoney: 0,
+  userTotal: 0,
 };
 
 const btnChange = document.querySelector(".btn-change");
 const btnCash = document.querySelector(".btn-cash");
+const btnComplete = document.querySelector(".btn-complete");
 const cashLeftTxt = document.querySelector(".txt-cash > span");
 const userMoneyTxt = document.querySelector(".txt-mycash > span");
+const userTotalTxt = document.querySelector(".txt-total");
+const ulSelected = document.querySelector(".cont-selected .list-selected");
 
 // 음료 데이터 렌더링
 function createBeverageItems(beverages) {
@@ -85,7 +90,6 @@ function addSelectedItems(item) {
 
 // 선택한 음료 보여주기
 function showSelectedItems() {
-  const ulSelected = document.querySelector(".cont-selected .list-selected");
   ulSelected.innerHTML = "";
 
   state.listSelected.forEach((item) => {
@@ -137,10 +141,69 @@ function returnChange() {
   userMoneyTxt.textContent = `${state.userMoney} 원`;
 }
 
+function getUserBeverage() {
+  if (!state.cashLeft || !state.listSelected.length) return;
+
+  const totalSelected = getTotal();
+
+  if (totalSelected <= state.cashLeft) {
+    state.listSelected.forEach((item) => {
+      const itemAlready = state.userBeverage.find((v) => v.id === item.id);
+
+      if (itemAlready) {
+        itemAlready.quantity += item.quantity;
+      } else {
+        state.userBeverage.push({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+        });
+      }
+    });
+    state.cashLeft -= totalSelected;
+    state.userTotal += totalSelected;
+    cashLeftTxt.textContent = `${state.cashLeft} 원`;
+    userTotalTxt.textContent = `총금액: ${state.userTotal}원`;
+    state.listSelected = [];
+    ulSelected.innerHTML = "";
+
+    showUserBeverage();
+  }
+}
+
+function showUserBeverage() {
+  const ul = document.querySelector(".cont-mybeverage .list-selected");
+  ul.innerHTML = "";
+
+  state.userBeverage.forEach((item) => {
+    const li = document.createElement("li");
+    const img = document.createElement("img");
+    const span = document.createElement("span");
+
+    li.classList.add("list-item-selected");
+    img.src = `${item.image}`;
+    span.classList.add("item-count");
+    span.textContent = item.quantity;
+
+    li.append(img, item.name, span);
+    ul.appendChild(li);
+  });
+}
+
+function getTotal() {
+  if (state.listSelected) {
+    return state.listSelected.reduce((total, item) => total + item.price, 0);
+  }
+  return 0;
+}
+
 function init() {
   createBeverageItems(state.beverage);
   btnChange.addEventListener("click", returnChange);
   btnCash.addEventListener("click", acceptCash);
+  btnComplete.addEventListener("click", getUserBeverage);
   userMoneyInfo();
 }
 
