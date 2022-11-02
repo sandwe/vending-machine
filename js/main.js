@@ -1,4 +1,5 @@
 import beverage from "./dummy_data/beverage.js";
+import checkNumFormat from "./checkNumFormat.js";
 
 const state = {
   beverage: beverage,
@@ -111,7 +112,8 @@ function userMoneyInfo() {
   let userMoney = parseInt(localStorage.getItem("userMoney")) || 0;
 
   if (!userMoney) {
-    userMoney += parseInt(prompt("소지금이 없어요. 소지금을 입력해주세요.", 1000));
+    const inp = prompt("소지금을 입력하세요. 미입력했거나 잘못된 형식일 경우 기본 소지금은 1000원입니다.", 1000);
+    userMoney += checkNumFormat(inp) ? parseInt(inp) : 1000;
     localStorage.setItem("userMoney", userMoney);
   }
 
@@ -120,7 +122,10 @@ function userMoneyInfo() {
 }
 
 function acceptCash() {
-  const inpVal = parseInt(document.querySelector(".input-cash").value) || 0;
+  const inp = document.querySelector(".input-cash").value;
+  const inpVal = checkNumFormat(inp) ? parseInt(inp) : 0;
+
+  // const inpVal = parseInt(document.querySelector(".input-cash").value) || 0;
 
   if (!inpVal || state.userMoney < inpVal) return;
 
