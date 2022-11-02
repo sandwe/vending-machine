@@ -116,7 +116,7 @@ function userMoneyInfo() {
   }
 
   state.userMoney = userMoney;
-  userMoneyTxt.textContent = `${state.userMoney} 원`;
+  userMoneyTxt.textContent = `${setComma(state.userMoney)} 원`;
 }
 
 function acceptCash() {
@@ -127,8 +127,8 @@ function acceptCash() {
   state.cashLeft += inpVal;
   state.userMoney -= inpVal;
   localStorage.setItem("userMoney", state.userMoney);
-  cashLeftTxt.textContent = `${state.cashLeft} 원`;
-  userMoneyTxt.textContent = `${state.userMoney} 원`;
+  cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
+  userMoneyTxt.textContent = `${setComma(state.userMoney)} 원`;
 }
 
 function returnChange() {
@@ -137,8 +137,8 @@ function returnChange() {
   state.userMoney += state.cashLeft;
   state.cashLeft = 0;
   localStorage.setItem("userMoney", state.userMoney);
-  cashLeftTxt.textContent = `${state.cashLeft} 원`;
-  userMoneyTxt.textContent = `${state.userMoney} 원`;
+  cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
+  userMoneyTxt.textContent = `${setComma(state.userMoney)} 원`;
 }
 
 function getUserBeverage() {
@@ -164,8 +164,8 @@ function getUserBeverage() {
     });
     state.cashLeft -= totalSelected;
     state.userTotal += totalSelected;
-    cashLeftTxt.textContent = `${state.cashLeft} 원`;
-    userTotalTxt.textContent = `총금액: ${state.userTotal}원`;
+    cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
+    userTotalTxt.textContent = `총금액: ${setComma(state.userTotal)}원`;
     state.listSelected = [];
     ulSelected.innerHTML = "";
 
@@ -197,6 +197,10 @@ function getTotal() {
     return state.listSelected.reduce((total, item) => total + item.price, 0);
   }
   return 0;
+}
+
+function setComma(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function init() {
