@@ -48,7 +48,7 @@ function createBeverageItems(beverages) {
       li.classList.add("soldout");
       soldout.classList.add("bg-soldout");
       soldOutImg.classList.add("img-soldout");
-      soldOutImg.src = "../../images/sold_out.png";
+      soldOutImg.src = "../images/sold_out.png";
       button.setAttribute("disabled", "");
 
       soldout.appendChild(soldOutImg);
@@ -199,7 +199,7 @@ function showUserBeverage() {
 
 function getTotal() {
   if (state.listSelected) {
-    return state.listSelected.reduce((total, item) => total + item.price, 0);
+    return state.listSelected.reduce((total, item) => total + item.price * item.quantity, 0);
   }
   return 0;
 }
