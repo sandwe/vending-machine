@@ -48,7 +48,7 @@ function createBeverageItems(beverages) {
       li.classList.add("soldout");
       soldout.classList.add("bg-soldout");
       soldOutImg.classList.add("img-soldout");
-      soldOutImg.src = "../images/sold_out.png";
+      soldOutImg.src = "images/sold_out.png";
       button.setAttribute("disabled", "");
 
       soldout.appendChild(soldOutImg);
