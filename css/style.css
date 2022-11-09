@@ -238,10 +238,23 @@ body {
   border-radius: 5px;
   background-color: #eae8fe;
   padding: 7px 10px;
+  text-align: end;
+  font-weight: 700;
 }
 .txt-mycash span {
-  float: right;
+  /* float: right; */
+  float: left;
+  /* font-weight: 700; */
+  font-weight: 500;
+}
+
+.txt-mycash input {
+  border: none;
+  background-color: #eae8fe;
   font-weight: 700;
+  /* width: 70px; */
+  text-align: end;
+  margin-right: 2px;
 }
 
 /* 획득한 음료 */

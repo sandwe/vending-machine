@@ -14,7 +14,8 @@ const btnChange = document.querySelector(".btn-change");
 const btnCash = document.querySelector(".btn-cash");
 const btnComplete = document.querySelector(".btn-complete");
 const cashLeftTxt = document.querySelector(".txt-cash > span");
-const userMoneyTxt = document.querySelector(".txt-mycash > span");
+// const userMoneyTxt = document.querySelector(".txt-mycash > span");
+const inpUserMoney = document.querySelector(".txt-mycash > input");
 const userTotalTxt = document.querySelector(".txt-total");
 const ulSelected = document.querySelector(".cont-selected .list-selected");
 
@@ -108,24 +109,20 @@ function showSelectedItems() {
   });
 }
 
+function saveUserMoney() {
+  localStorage.setItem("userMoney", parseInt(inpUserMoney.value));
+}
+
 function userMoneyInfo() {
   let userMoney = parseInt(localStorage.getItem("userMoney")) || 0;
 
-  if (!userMoney) {
-    const inp = prompt("소지금을 입력하세요. 미입력했거나 잘못된 형식일 경우 기본 소지금은 1000원입니다.", 1000);
-    userMoney += checkNumFormat(inp) ? parseInt(inp) : 1000;
-    localStorage.setItem("userMoney", userMoney);
-  }
-
   state.userMoney = userMoney;
-  userMoneyTxt.textContent = `${setComma(state.userMoney)} 원`;
+  inpUserMoney.value = state.userMoney;
 }
 
 function acceptCash() {
   const inp = document.querySelector(".input-cash").value;
   const inpVal = checkNumFormat(inp) ? parseInt(inp) : 0;
-
-  // const inpVal = parseInt(document.querySelector(".input-cash").value) || 0;
 
   if (!inpVal || state.userMoney < inpVal) return;
 
@@ -133,7 +130,7 @@ function acceptCash() {
   state.userMoney -= inpVal;
   localStorage.setItem("userMoney", state.userMoney);
   cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
-  userMoneyTxt.textContent = `${setComma(state.userMoney)} 원`;
+  inpUserMoney.value = state.userMoney;
 }
 
 function returnChange() {
@@ -143,7 +140,7 @@ function returnChange() {
   state.cashLeft = 0;
   localStorage.setItem("userMoney", state.userMoney);
   cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
-  userMoneyTxt.textContent = `${setComma(state.userMoney)} 원`;
+  inpUserMoney.value = state.userMoney;
 }
 
 function getUserBeverage() {
@@ -213,6 +210,7 @@ function init() {
   btnChange.addEventListener("click", returnChange);
   btnCash.addEventListener("click", acceptCash);
   btnComplete.addEventListener("click", getUserBeverage);
+  inpUserMoney.addEventListener("change", saveUserMoney);
   userMoneyInfo();
 }
 
