@@ -203,17 +203,17 @@ body {
 }
 
 /* 잔액 */
-.cont-controller .txt-cash {
+.cont-controller .txt-money {
   background-color: #eae8fe;
   padding: 7px 10px;
 }
 
-.txt-cash span {
+.txt-money span {
   float: right;
 }
 
 /* 입금액 입력 */
-.cont-controller .input-cash {
+.cont-controller .input-money {
   border: 1px solid #bdbdbd;
   padding: 6px;
 }
@@ -234,21 +234,21 @@ body {
   padding: 9px 27px;
   margin-bottom: 13px;
 }
-.section-money .txt-mycash {
+.section-money .txt-mymoney {
   border-radius: 5px;
   background-color: #eae8fe;
   padding: 7px 10px;
   text-align: end;
   font-weight: 700;
 }
-.txt-mycash span {
+.txt-mymoney span {
   /* float: right; */
   float: left;
   /* font-weight: 700; */
   font-weight: 500;
 }
 
-.txt-mycash input {
+.txt-mymoney input {
   border: none;
   background-color: #eae8fe;
   font-weight: 700;

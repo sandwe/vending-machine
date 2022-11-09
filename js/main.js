@@ -1,22 +1,22 @@
 import beverage from "./dummy_data/beverage.js";
-// import checkNumFormat from "./utils/checkNumFormat.js";
 import getKRW from "./utils/getKRW.js";
 
 const state = {
   beverage: beverage,
   listSelected: [],
   userBeverage: [],
-  cashLeft: 0,
+  moneyLeft: 0,
   userMoney: 0,
   userTotal: 0,
 };
 
 const btnChange = document.querySelector(".btn-change");
-const btnCash = document.querySelector(".btn-cash");
+const btnMoney = document.querySelector(".btn-money");
 const btnComplete = document.querySelector(".btn-complete");
-const cashLeftTxt = document.querySelector(".txt-cash > span");
-// const userMoneyTxt = document.querySelector(".txt-mycash > span");
-const inpUserMoney = document.querySelector(".txt-mycash > input");
+const moneyLeftTxt = document.querySelector(".txt-money > span");
+// const userMoneyTxt = document.querySelector(".txt-mymoney > span");
+const inpUserMoney = document.querySelector(".txt-mymoney > input");
+const inpDeposit = document.querySelector(".input-money");
 const userTotalTxt = document.querySelector(".txt-total");
 const ulSelected = document.querySelector(".cont-selected .list-selected");
 
@@ -110,52 +110,41 @@ function showSelectedItems() {
   });
 }
 
-function checkInput() {
-  const inpValid = getKRW(inpUserMoney.value);
-  inpUserMoney.value = inpValid;
+function checkInput(event) {
+  const inpValid = getKRW(event.target.value);
+  event.target.value = inpValid;
 }
 
 function saveUserMoney() {
   if (inpUserMoney.value) {
-    localStorage.setItem("userMoney", parseInt(inpUserMoney.value.replace(/\D/, "")));
+    state.userMoney += parseInt(inpUserMoney.value.replaceAll(",", ""));
   }
 }
 
-function userMoneyInfo() {
-  const savedMoney = localStorage.getItem("userMoney");
-  state.userMoney = parseInt(savedMoney) || 0;
-  inpUserMoney.value = new Intl.NumberFormat().format(savedMoney);
-}
-
-function acceptCash() {
-  const inp = document.querySelector(".input-cash").value;
-  const inpVal = checkNumFormat(inp) ? parseInt(inp) : 0;
-
-  if (!inpVal || state.userMoney < inpVal) return;
-
-  state.cashLeft += inpVal;
-  state.userMoney -= inpVal;
-  localStorage.setItem("userMoney", state.userMoney);
-  cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
-  inpUserMoney.value = state.userMoney;
+function acceptMoney() {
+  const inpVal = inpDeposit.value.replaceAll(",", "");
+  if (inpVal === "" || state.userMoney < parseInt(inpVal)) return;
+  state.moneyLeft += parseInt(inpVal);
+  state.userMoney -= parseInt(inpVal);
+  moneyLeftTxt.textContent = new Intl.NumberFormat().format(state.moneyLeft) + "원";
+  inpUserMoney.value = getKRW(state.userMoney);
 }
 
 function returnChange() {
-  if (!state.cashLeft) return;
+  if (!state.moneyLeft) return;
 
-  state.userMoney += state.cashLeft;
-  state.cashLeft = 0;
-  localStorage.setItem("userMoney", state.userMoney);
-  cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
+  state.userMoney += state.moneyLeft;
+  state.moneyLeft = 0;
+  moneyLeftTxt.textContent = `${setComma(state.moneyLeft)} 원`;
   inpUserMoney.value = state.userMoney;
 }
 
 function getUserBeverage() {
-  if (!state.cashLeft || !state.listSelected.length) return;
+  if (!state.moneyLeft || !state.listSelected.length) return;
 
   const totalSelected = getTotal();
 
-  if (totalSelected <= state.cashLeft) {
+  if (totalSelected <= state.moneyLeft) {
     state.listSelected.forEach((item) => {
       const itemAlready = state.userBeverage.find((v) => v.id === item.id);
 
@@ -171,9 +160,9 @@ function getUserBeverage() {
         });
       }
     });
-    state.cashLeft -= totalSelected;
+    state.moneyLeft -= totalSelected;
     state.userTotal += totalSelected;
-    cashLeftTxt.textContent = `${setComma(state.cashLeft)} 원`;
+    moneyLeftTxt.textContent = `${setComma(state.moneyLeft)} 원`;
     userTotalTxt.textContent = `총금액: ${setComma(state.userTotal)}원`;
     state.listSelected = [];
     ulSelected.innerHTML = "";
@@ -208,19 +197,14 @@ function getTotal() {
   return 0;
 }
 
-function setComma(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 function init() {
   createBeverageItems(state.beverage);
   btnChange.addEventListener("click", returnChange);
-  btnCash.addEventListener("click", acceptCash);
+  btnMoney.addEventListener("click", acceptMoney);
   btnComplete.addEventListener("click", getUserBeverage);
   inpUserMoney.addEventListener("change", saveUserMoney);
   inpUserMoney.addEventListener("input", checkInput);
-
-  userMoneyInfo();
+  inpDeposit.addEventListener("input", checkInput);
 }
 
 init();
