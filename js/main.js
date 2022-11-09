@@ -1,5 +1,6 @@
 import beverage from "./dummy_data/beverage.js";
-import checkNumFormat from "./checkNumFormat.js";
+// import checkNumFormat from "./utils/checkNumFormat.js";
+import getKRW from "./utils/getKRW.js";
 
 const state = {
   beverage: beverage,
@@ -109,15 +110,21 @@ function showSelectedItems() {
   });
 }
 
+function checkInput() {
+  const inpValid = getKRW(inpUserMoney.value);
+  inpUserMoney.value = inpValid;
+}
+
 function saveUserMoney() {
-  localStorage.setItem("userMoney", parseInt(inpUserMoney.value));
+  if (inpUserMoney.value) {
+    localStorage.setItem("userMoney", parseInt(inpUserMoney.value.replace(/\D/, "")));
+  }
 }
 
 function userMoneyInfo() {
-  let userMoney = parseInt(localStorage.getItem("userMoney")) || 0;
-
-  state.userMoney = userMoney;
-  inpUserMoney.value = state.userMoney;
+  const savedMoney = localStorage.getItem("userMoney");
+  state.userMoney = parseInt(savedMoney) || 0;
+  inpUserMoney.value = new Intl.NumberFormat().format(savedMoney);
 }
 
 function acceptCash() {
@@ -211,6 +218,8 @@ function init() {
   btnCash.addEventListener("click", acceptCash);
   btnComplete.addEventListener("click", getUserBeverage);
   inpUserMoney.addEventListener("change", saveUserMoney);
+  inpUserMoney.addEventListener("input", checkInput);
+
   userMoneyInfo();
 }
 
