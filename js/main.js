@@ -14,7 +14,6 @@ const btnChange = document.querySelector(".btn-change");
 const btnMoney = document.querySelector(".btn-money");
 const btnComplete = document.querySelector(".btn-complete");
 const moneyLeftTxt = document.querySelector(".txt-money > span");
-// const userMoneyTxt = document.querySelector(".txt-mymoney > span");
 const inpUserMoney = document.querySelector(".txt-mymoney > input");
 const inpDeposit = document.querySelector(".input-money");
 const userTotalTxt = document.querySelector(".txt-total");
@@ -135,8 +134,8 @@ function returnChange() {
 
   state.userMoney += state.moneyLeft;
   state.moneyLeft = 0;
-  moneyLeftTxt.textContent = `${setComma(state.moneyLeft)} 원`;
-  inpUserMoney.value = state.userMoney;
+  moneyLeftTxt.textContent = new Intl.NumberFormat().format(state.moneyLeft) + "원";
+  inpUserMoney.value = getKRW(state.userMoney);
 }
 
 function getUserBeverage() {
@@ -162,8 +161,8 @@ function getUserBeverage() {
     });
     state.moneyLeft -= totalSelected;
     state.userTotal += totalSelected;
-    moneyLeftTxt.textContent = `${setComma(state.moneyLeft)} 원`;
-    userTotalTxt.textContent = `총금액: ${setComma(state.userTotal)}원`;
+    moneyLeftTxt.textContent = new Intl.NumberFormat().format(state.moneyLeft) + "원";
+    userTotalTxt.textContent = "총금액: " + new Intl.NumberFormat().format(state.userTotal) + "원";
     state.listSelected = [];
     ulSelected.innerHTML = "";
 
